@@ -1,0 +1,3 @@
+packages:
+ - "998.terminal/**"
+ - "999.pivot/**"
