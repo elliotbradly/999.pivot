@@ -37,10 +37,17 @@ export const PATCH_PIVOT = "[Patch action] Patch Pivot";
  readonly type = PATCH_PIVOT;
  constructor(public bale: PivotBit) {}
  }
+
+ export const COUNT_PIVOT = "[Patch action] Count Pivot";
+ export class CountPivot implements Action {
+ readonly type = COUNT_PIVOT;
+ constructor(public bale: PivotBit) {}
+ }
  
 export type Actions = | InitPivot | UpdatePivot 
 | OpenPivot
 | RunPivot
 | EditPivot
 | PatchPivot
+| CountPivot
 

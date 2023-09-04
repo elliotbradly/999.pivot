@@ -10,110 +10,112 @@ var bit, val, idx, dex, lst, dat;
 
 export const initPivot = async (cpy: PivotModel, bal: PivotBit, ste: State) => {
 
- if (bal.dat != null) bit = await ste.hunt(ActBus.INIT_BUS, { idx: cpy.idx, lst: [ActPvt], dat: bal.dat, src: bal.src })
+    if (bal.dat != null) bit = await ste.hunt(ActBus.INIT_BUS, { idx: cpy.idx, lst: [ActPvt], dat: bal.dat, src: bal.src })
 
- if (bal.val == 1) patch(ste, ActMnu.INIT_MENU, bal);
+    if (bal.val == 1) patch(ste, ActMnu.INIT_MENU, bal);
 
 
- if (bal.slv != null) bal.slv({ intBit: { idx: "init-pivot" } });
+    if (bal.slv != null) bal.slv({ intBit: { idx: "init-pivot" } });
 
- return cpy;
+    return cpy;
 };
 
 export const updatePivot = (cpy: PivotModel, bal: PivotBit, ste: State) => {
 
- const { exec } = require('child_process');
+    const { exec } = require('child_process');
 
- exec('tsc -b 999.pivot', async (err, stdout, stderr) => {
- if (err) {
- console.error(`exec error: ${err}`);
- }
+    exec('tsc -b 999.pivot', async (err, stdout, stderr) => {
+        if (err) {
+            console.error(`exec error: ${err}`);
+        }
 
- process.chdir("../999.vurt");
- bit = await ste.bus(ActVrt.BUNDLE_VURT, { src: "999.pivot" });
- process.chdir("../999.pivot");
+        process.chdir("../999.vurt");
+        bit = await ste.bus(ActVrt.BUNDLE_VURT, { src: "999.pivot" });
+        process.chdir("../999.pivot");
 
- bit = await ste.bus(ActDsk.READ_DISK, { src: './work/999.pivot.js' })
- var pivot = bit.dskBit.dat;
+        bit = await ste.bus(ActDsk.READ_DISK, { src: './work/999.pivot.js' })
+        var pivot = bit.dskBit.dat;
 
- bit = await ste.bus(ActDsk.WRITE_DISK, { src: '../gillisse/public/jsx/999.pivot.js', dat: pivot })
+        bit = await ste.bus(ActDsk.WRITE_DISK, { src: '../gillisse/public/jsx/999.pivot.js', dat: pivot })
 
- bit = await ste.bus(ActDsk.READ_DISK, { src: './index.html' })
- var html = bit.dskBit.dat;
+        bit = await ste.bus(ActDsk.READ_DISK, { src: './index.html' })
+        var html = bit.dskBit.dat;
 
- bit = await ste.bus(ActDsk.READ_DISK, { src: './index.js' })
- var index = bit.dskBit.dat;
+        bit = await ste.bus(ActDsk.READ_DISK, { src: './index.js' })
+        var index = bit.dskBit.dat;
 
- bit = await ste.bus(ActDsk.WRITE_DISK, { src: '../gillisse/public/jsx/index.js', dat: index })
- bit = await ste.bus(ActDsk.WRITE_DISK, { src: '../gillisse/index.html', dat: html })
+        bit = await ste.bus(ActDsk.WRITE_DISK, { src: '../gillisse/public/jsx/index.js', dat: index })
+        bit = await ste.bus(ActDsk.WRITE_DISK, { src: '../gillisse/index.html', dat: html })
 
- setTimeout(() => {
- if (bal.slv != null) bal.slv({ pvtBit: { idx: "update-pivot" } });
- }, 3);
+        setTimeout(() => {
+            if (bal.slv != null) bal.slv({ pvtBit: { idx: "update-pivot" } });
+        }, 3);
 
- });
+    });
 
- return cpy;
+    return cpy;
 };
 
 
 export const openPivot = async (cpy: PivotModel, bal: PivotBit, ste: State) => {
 
- bit = await ste.bus(ActDsk.COPY_DISK, { src: './vue', idx: '../gillisse/src' })
+    bit = await ste.bus(ActDsk.COPY_DISK, { src: './vue', idx: '../gillisse/src' })
 
- bit = await ste.hunt(ActPvt.RUN_PIVOT, {})
+    bit = await ste.hunt(ActPvt.RUN_PIVOT, {})
 
- const open = require('open')
+    const open = require('open')
 
- var loc = './vrt.opn.bat'
- bit = await open(loc)
+    var loc = './vrt.opn.bat'
+    bit = await open(loc)
 
- setTimeout(() => {
- if (bal.slv != null) bal.slv({ pvtBit: { idx: "open-pivot" } });
- }, 33)
+    setTimeout(() => {
+        if (bal.slv != null) bal.slv({ pvtBit: { idx: "open-pivot" } });
+    }, 33)
 
 
- return cpy;
+    return cpy;
 };
+
 export const runPivot = async (cpy: PivotModel, bal: PivotBit, ste: State) => {
 
- const open = require('open')
+    const open = require('open')
 
- var loc = './vrt.gil.bat'
- bit = await open(loc)
+    var loc = './vrt.gil.bat'
+    bit = await open(loc)
 
- setTimeout(() => {
- if (bal.slv != null) bal.slv({ pvtBit: { idx: "run-pivot" } });
- })
+    setTimeout(() => {
+        if (bal.slv != null) bal.slv({ pvtBit: { idx: "run-pivot" } });
+    })
 
- return cpy;
+    return cpy;
 };
+
 export const editPivot = (cpy: PivotModel, bal: PivotBit, ste: State) => {
 
- const { exec } = require('child_process');
+    const { exec } = require('child_process');
 
- process.chdir("../../studio/");
+    process.chdir("../../studio/");
 
- exec('start Code.exe ../packages/gillisse', async (err, stdout, stderr) => {
- if (err) {
- console.error(`exec error: ${err}`);
- }
+    exec('start Code.exe ../packages/gillisse', async (err, stdout, stderr) => {
+        if (err) {
+            console.error(`exec error: ${err}`);
+        }
 
- process.chdir("../packages/999.pivot");
+        process.chdir("../packages/999.pivot");
 
- if (bal.slv != null) bal.slv({ pvtBit: { idx: "edit-pivot", dat: {} } });
- });
+        if (bal.slv != null) bal.slv({ pvtBit: { idx: "edit-pivot", dat: {} } });
+    });
 
- return cpy;
+    return cpy;
 };
 
 
 var patch = (ste, type, bale) => ste.dispatch({ type, bale });
 
-export const patchPivot = (cpy: PivotModel, bal:PivotBit, ste: State) => {
- debugger
- return cpy;
- };
+export const patchPivot = (cpy: PivotModel, bal: PivotBit, ste: State) => {
+    debugger
+    return cpy;
+};
 
 import { PivotModel } from "../pivot.model";
 import PivotBit from "../fce/pivot.bit";

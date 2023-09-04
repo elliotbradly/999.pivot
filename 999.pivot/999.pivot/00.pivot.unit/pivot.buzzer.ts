@@ -4,5 +4,8 @@ export { openPivot  } from "./buz/pivot.buzz";
 export { runPivot  } from "./buz/pivot.buzz";
 export { editPivot  } from "./buz/pivot.buzz";
 export { patchPivot  } from "./buz/pivot.buzz";
+export { countPivot  } from "./buz/count-pivot";
+
+
 
 

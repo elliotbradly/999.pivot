@@ -24,6 +24,9 @@ case Act.EDIT_PIVOT:
  
 case Act.PATCH_PIVOT:
  return Buzz.patchPivot(clone(model), act.bale, state);
+
+ case Act.COUNT_PIVOT:
+ return Buzz.countPivot(clone(model), act.bale, state);
  
  default:
  return model;
