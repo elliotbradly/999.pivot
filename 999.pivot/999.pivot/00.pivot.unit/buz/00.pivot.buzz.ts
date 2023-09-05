@@ -109,6 +109,15 @@ export const editPivot = (cpy: PivotModel, bal: PivotBit, ste: State) => {
     return cpy;
 };
 
+export const listPivot = (cpy: PivotModel, bal: PivotBit, ste: State) => {
+
+
+
+    bal.slv({ pvtBit: { idx: "edit-pivot", dat: {} } });
+
+    return cpy;
+};
+
 
 var patch = (ste, type, bale) => ste.dispatch({ type, bale });
 

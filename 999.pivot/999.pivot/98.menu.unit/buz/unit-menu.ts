@@ -3,7 +3,7 @@ import * as ActMnu from "../menu.action";
 import * as ActRen from "../../act/renpy.action";
 //import * as ActWrk from "../../act/work.action";
 
-//import * as ActVrt from "../../00.vurt.unit/vurt.action";
+import * as ActPvt from "../../00.pivot.unit/pivot.action";
 import * as ActTrm from "../../01.terminal.unit/terminal.action";
 //import * as ActDsk from "../../96.disk.unit/disk.action";
 import * as ActUnt from "../../02.unit.unit/unit.action";
@@ -11,65 +11,86 @@ import * as ActCol from "../../97.collect.unit/collect.action";
 
 var lst, bit, dat, src;
 
-export const collectMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
+export const unitMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
 
   var bit;
 
-  bit = await ste.hunt(ActTrm.WRITE_TERMINAL, { src: "" });
-  bit = await ste.hunt(ActTrm.WRITE_TERMINAL, { val: 5, src: "--------------" });
-  bit = await ste.hunt(ActTrm.WRITE_TERMINAL, { val: 7, src: "COLLECT MENU " });
-  bit = await ste.hunt(ActTrm.WRITE_TERMINAL, { val: 5, src: "--------------" });
+  bit = await ste.hunt(ActTrm.WRITE_TERMINAL, { val: 1, src: "" })
+  bit = await ste.hunt(ActTrm.WRITE_TERMINAL, { val: 1, src: "-----------" })
+  bit = await ste.hunt(ActTrm.WRITE_TERMINAL, { val: 4, src: "UNIT MENU" })
+  bit = await ste.hunt(ActTrm.WRITE_TERMINAL, { val: 1, src: "-----------" })
 
-  //bit = await ste.hunt(ActDsk.INIT_DISK, {});
-
-  var list = [ActCol.WRITE_COLLECT, ActCol.READ_COLLECT, ActCol.CREATE_COLLECT, ActCol.FORMAT_COLLECT];;
+  var list = [ActUnt.CODE_UNIT, ActUnt.UPDATE_UNIT, ActUnt.CREATE_UNIT]
 
   bit = await ste.hunt(ActTrm.UPDATE_TERMINAL, { lst: list });
-
   bit = bit.trmBit;
 
   var idx = list[bit.val];
+
   switch (idx) {
 
-    case ActCol.WRITE_COLLECT:
+    case ActUnt.CODE_UNIT:
 
-      //bit = await ste.hunt(ActTst.WRITE_TEST, {idx:"tst00", dat:{src:'src00'}})
-      bit = await ste.hunt(ActTrm.WRITE_TERMINAL, { val: 7, src: JSON.stringify(bit) });
+      bit = await ste.hunt( ActPvt.LIST_PIVOT );
+      list = bit.pvtBit.lst
+      bit = await ste.hunt(ActTrm.UPDATE_TERMINAL, { lst: list });
+      var val = bit.trmBit.val
+      var src = list[val];
 
-      break
+      bit = await ste.hunt(ActUnt.CODE_UNIT, { src });
 
-    case ActCol.READ_COLLECT:
-
-      //bit = await ste.hunt(ActTst.READ_TEST, {idx:'tst00'})
-      bit = await ste.hunt(ActTrm.WRITE_TERMINAL, { val: 7, src: JSON.stringify(bit) });
-
-      break
-    
-      case ActCol.FORMAT_COLLECT:
-
-        bit = await ste.hunt(ActTrm.INPUT_TERMINAL, { lst: ["", "", "format collect..."] });
-        src = bit.trmBit.src;
-       
-        bit = await ste.hunt(ActCol.FORMAT_COLLECT, {src})
-        bit = await ste.hunt(ActTrm.WRITE_TERMINAL, { val: 7, src: JSON.stringify(bit) });
-  
-        break
-
-
-    case ActCol.CREATE_COLLECT:
-
-      //bit = await ste.hunt(ActTst.CREATE_TEST, {idx:'tst01', dat:{src:'alligator'}})
-      bit = await ste.hunt(ActTrm.WRITE_TERMINAL, { val: 7, src: JSON.stringify(bit) });
+      unitMenu(cpy, bal, ste);
 
       break
 
+    case ActUnt.CREATE_UNIT:
+
+      bit = await ste.hunt(ActTrm.INPUT_TERMINAL, { lst: ["", "", "Create Unit"] });
+      bal.src = bit.trmBit.src;
+
+      bit = await ste.hunt(ActUnt.CREATE_UNIT, bal);
+
+      unitMenu(cpy, bal, ste);
+
+      break
+
+    case ActUnt.UPDATE_UNIT:
+
+
+      bit = await ste.hunt(  ActPvt.LIST_PIVOT );
+      list = bit.pvtBit.lst
+      bit = await ste.hunt(ActTrm.UPDATE_TERMINAL, { lst: list });
+      var val = bit.trmBit.val
+      var src = list[val];
+
+      bit = await ste.hunt( ActUnt.LIST_UNIT, { src });
+      list = bit.untBit.lst
+      bit = await ste.hunt(ActTrm.UPDATE_TERMINAL, { lst: list });
+      var val = bit.trmBit.val
+      var idx = list[val];
+
+      bit = await ste.hunt(ActTrm.INPUT_TERMINAL, { lst: ["", "", "Input Verb"] });
+      var dat = bit.trmBit.src;
+
+      bit = await ste.hunt(ActUnt.UPDATE_UNIT, { src, idx, dat });
+
+      unitMenu(cpy, bal, ste);
+
+
+      //var list = ['core', 'bus', 'hunt']
+      //bit = await ste.bus(ActTrm.UPDATE_TERMINAL, { lst: list });
+      //bit = bit.trmBit;
+      //var idx = list[bit.val];
+
+      //ste.hunt(ActVrt.REPLACE_VURT, { idx })
+
+      break
   }
 
-  
-  //if (bal.slv != null) bal.slv({ mnuBit: { idx: "test-menu" } });
 
   return cpy;
 };
+
 
 
 

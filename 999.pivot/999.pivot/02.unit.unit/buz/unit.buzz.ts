@@ -267,6 +267,14 @@ export const codeUnit = (cpy: UnitModel, bal: UnitBit, ste: State) => {
   return cpy;
 };
 
+export const listUnit = (cpy: UnitModel, bal: UnitBit, ste: State) => {
+
+
+  bal.slv({ untBit: { idx: "list-unit", dat: {} } });
+
+  return cpy;
+};
+
 
 import { UnitModel } from "../unit.model";
 import UnitBit from "../fce/unit.bit";

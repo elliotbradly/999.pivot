@@ -1,9 +1,9 @@
-export { initPivot  } from "./buz/pivot.buzz";
-export { updatePivot  } from "./buz/pivot.buzz";
-export { openPivot  } from "./buz/pivot.buzz";
-export { runPivot  } from "./buz/pivot.buzz";
-export { editPivot  } from "./buz/pivot.buzz";
-export { patchPivot  } from "./buz/pivot.buzz";
+export { initPivot  } from "./buz/00.pivot.buzz";
+export { updatePivot  } from "./buz/00.pivot.buzz";
+export { openPivot  } from "./buz/00.pivot.buzz";
+export { runPivot  } from "./buz/00.pivot.buzz";
+export { editPivot  } from "./buz/00.pivot.buzz";
+export { patchPivot  } from "./buz/00.pivot.buzz";
 export { countPivot  } from "./buz/count-pivot";
 
 
