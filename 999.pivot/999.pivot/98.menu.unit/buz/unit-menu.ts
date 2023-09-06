@@ -20,7 +20,7 @@ export const unitMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
   bit = await ste.hunt(ActTrm.WRITE_TERMINAL, { val: 4, src: "UNIT MENU" })
   bit = await ste.hunt(ActTrm.WRITE_TERMINAL, { val: 1, src: "-----------" })
 
-  var list = [ActUnt.CODE_UNIT, ActUnt.UPDATE_UNIT, ActUnt.CREATE_UNIT]
+  var list = [ActUnt.UPDATE_UNIT, ActUnt.CREATE_UNIT, ActUnt.CODE_UNIT]
 
   bit = await ste.hunt(ActTrm.UPDATE_TERMINAL, { lst: list });
   bit = bit.trmBit;
