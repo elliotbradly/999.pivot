@@ -6,3 +6,4 @@ export { editTerminal  } from "./buz/terminal.buzz";
 export { printTerminal  } from "./buz/terminal.buzz";
 export { closeTerminal  } from "./buz/terminal.buzz";
 export { optionTerminal  } from "./buz/terminal.buzz";
+export { inputTerminal  } from "./buz/terminal.buzz";

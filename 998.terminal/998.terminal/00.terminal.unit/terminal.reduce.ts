@@ -28,6 +28,9 @@ case Act.CLOSE_TERMINAL:
 case Act.OPTION_TERMINAL:
  return Buzz.optionTerminal(clone(model), act.bale, state);
  
+case Act.INPUT_TERMINAL:
+ return Buzz.inputTerminal(clone(model), act.bale, state);
+ 
  default:
  return model;
  }

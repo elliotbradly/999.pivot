@@ -1,6 +1,6 @@
 export default interface TerminalBit {
   idx?: string;
-  lst?: any;
+  lst?: any[];
   dat?: any;
   src?: string;
   val?: number;

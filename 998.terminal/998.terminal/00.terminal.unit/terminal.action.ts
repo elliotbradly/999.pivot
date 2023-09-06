@@ -45,9 +45,16 @@ export const OPTION_TERMINAL = "[Option action] Option Terminal";
  constructor(public bale: TerminalBit) {}
  }
  
+export const INPUT_TERMINAL = "[Input action] Input Terminal";
+ export class InputTerminal implements Action {
+ readonly type = INPUT_TERMINAL;
+ constructor(public bale: TerminalBit) {}
+ }
+ 
 export type Actions = | InitTerminal | UpdateTerminal 
 | RunTerminal
 | EditTerminal
 | PrintTerminal
 | CloseTerminal
 | OptionTerminal
+| InputTerminal
