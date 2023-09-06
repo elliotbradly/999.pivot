@@ -269,8 +269,10 @@ export const codeUnit = (cpy: UnitModel, bal: UnitBit, ste: State) => {
 
 export const listUnit = (cpy: UnitModel, bal: UnitBit, ste: State) => {
 
+  var list = FS.readdirSync('../' + bal.src + '/' + bal.src)
+  var lst = list.filter((e) => { return e.includes('.unit') == true })
 
-  bal.slv({ untBit: { idx: "list-unit", dat: {} } });
+  bal.slv({ untBit: { idx: "list-unit", lst } });
 
   return cpy;
 };

@@ -13,7 +13,6 @@ export class UpdateMenu implements Action {
   constructor(public bale: MenuBit) { }
 }
 
-
 export const TEST_MENU = "[Menu action] Test Menu";
 export class TestMenu implements Action {
   readonly type = TEST_MENU;
@@ -26,27 +25,25 @@ export class CloseMenu implements Action {
   constructor(public bale: MenuBit) { }
 }
 
-export const SHADE_MENU = "[Shade action] Shade Menu";
- export class ShadeMenu implements Action {
- readonly type = SHADE_MENU;
- constructor(public bale: MenuBit) {}
- }
- 
+export const UNIT_MENU = "[Menu action] Unit Menu";
+export class UnitMenu implements Action {
+  readonly type = UNIT_MENU;
+  constructor(public bale: MenuBit) { }
+}
+
 export const VISAGE_MENU = "[Visage action] Visage Menu";
- export class VisageMenu implements Action {
- readonly type = VISAGE_MENU;
- constructor(public bale: MenuBit) {}
- }
+export class VisageMenu implements Action {
+  readonly type = VISAGE_MENU;
+  constructor(public bale: MenuBit) { }
+}
 
- export const CONTAINER_MENU = "[Visage action] Container Menu";
- export class ContainerMenu implements Action {
- readonly type = CONTAINER_MENU;
- constructor(public bale: MenuBit) {}
- }
- 
+export const CONTAINER_MENU = "[Visage action] Container Menu";
+export class ContainerMenu implements Action {
+  readonly type = CONTAINER_MENU;
+  constructor(public bale: MenuBit) { }
+}
 
- 
 export type Actions = InitMenu | UpdateMenu | TestMenu | CloseMenu
-| ShadeMenu
-| VisageMenu
-| ContainerMenu
+  | UnitMenu
+  | VisageMenu
+  | ContainerMenu

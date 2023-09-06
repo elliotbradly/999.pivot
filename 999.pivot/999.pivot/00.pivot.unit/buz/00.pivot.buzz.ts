@@ -109,11 +109,41 @@ export const editPivot = (cpy: PivotModel, bal: PivotBit, ste: State) => {
     return cpy;
 };
 
-export const listPivot = (cpy: PivotModel, bal: PivotBit, ste: State) => {
+export const listPivot = async (cpy: PivotModel, bal: PivotBit, ste: State) => {
 
 
+    var root = "../";
 
-    bal.slv({ pvtBit: { idx: "edit-pivot", dat: {} } });
+    var listDir = await FS.readdir(root);
+    var pivotList = [];
+
+    listDir.forEach((a) => {
+        var pth = root + a;
+        if (FS.lstatSync(pth).isDirectory() == false) return;
+        if (a.includes(".") == false) return;
+        var sub = a.split(".")[0];
+        if (sub.length != 3) return;
+        if (S(sub).isNumeric().s == false) return;
+        pivotList.push(a);
+    });
+
+    if (bal.src != null) {
+
+        var out = []
+
+        pivotList.forEach((a) => {
+
+            var loc = '../' + a + '/' + bal.src
+            var flag = FS.existsSync(loc)
+            if (flag == false) return
+            out.push(a)
+        })
+
+        pivotList = out
+    }
+
+
+    bal.slv({ pvtBit: { idx: "list-pivot", lst: pivotList } });
 
     return cpy;
 };
@@ -129,4 +159,6 @@ export const patchPivot = (cpy: PivotModel, bal: PivotBit, ste: State) => {
 import { PivotModel } from "../pivot.model";
 import PivotBit from "../fce/pivot.bit";
 import State from "../../99.core/state";
+import * as FS from 'fs-extra'
+import * as S from 'string' 
 

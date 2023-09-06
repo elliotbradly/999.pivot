@@ -24,7 +24,7 @@ export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
     bit = await ste.hunt(ActTrm.WRITE_TERMINAL, { src: "PIVOT PIVOT V0", bit: 'local' })
     bit = await ste.hunt(ActTrm.WRITE_TERMINAL, { src: "-----------", bit: "local" })
 
-    var lst = [ActPvt.COUNT_PIVOT, ActPvt.UPDATE_PIVOT, ActPvt.OPEN_PIVOT, ActPvt.EDIT_PIVOT]
+    var lst = [ ActMnu.UNIT_MENU, ActPvt.COUNT_PIVOT ]
 
     bit = await ste.hunt(ActTrm.UPDATE_TERMINAL, { lst })
 
@@ -49,6 +49,10 @@ export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
 
         case ActPvt.UPDATE_PIVOT:
             bit = await ste.hunt(ActPvt.UPDATE_PIVOT, {})
+            break;
+
+        case ActMnu.UNIT_MENU:
+            bit = await ste.hunt(ActMnu.UNIT_MENU, {})
             break;
 
 
