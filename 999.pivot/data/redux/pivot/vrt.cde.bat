@@ -1,4 +1,3 @@
 cd..
-cd..
-cd studio
-start Code.exe ../packages/{{=it.pivot}}
+cd code
+start Code.exe ../{{=it.pivot}}

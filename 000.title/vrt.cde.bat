@@ -1,4 +1,3 @@
 cd..
-cd..
-cd studio
-start Code.exe ../packages/000.title
+cd code
+start Code.exe ../000.title

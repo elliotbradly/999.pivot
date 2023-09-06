@@ -25,19 +25,18 @@ var open = async ( prt ) =>{
 
  var bit;
 
- 
- require("../998.work/work/999.vurt");
+ //require("../998.terminal/");
  require("../000.title/000.title/000.quest.title");
 
  const MQTT = require("async-mqtt");
 
  var title = command_line();
 
- var local = 'mqtt:**localhost:' + prt;
+ var local = 'mqtt://localhost:' + prt;
 
  var localBit = { idx: 'local', src: local }
 
- bit = await VURT.hunt(VURT.ActVrt.INIT_VURT , {dat: MQTT, src:local} );
+ //bit = await VURT.hunt(VURT.ActVrt.INIT_VURT , {dat: MQTT, src:local} );
  bit = await TITLE.hunt( TITLE.ActTtl.INIT_TITLE , { val: 1, dat: MQTT, src:  [localBit]  });
  
 }
