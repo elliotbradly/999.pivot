@@ -163,3 +163,4 @@ apps
 /packages/002.space/*.ini
 /packages/123.renpy/desktop.ini
 /998.terminal/*.ini
+/000.title/*.ini

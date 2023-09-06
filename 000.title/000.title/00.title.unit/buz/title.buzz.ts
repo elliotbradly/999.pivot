@@ -3,8 +3,8 @@ import * as ActBus from "../../99.bus.unit/bus.action";
 
 import * as ActTtl from "../title.action";
 
-import * as ActVrt from "../../act/vurt.action";
-import * as ActDsk from "../../act/disk.action";
+//import * as ActVrt from "../../act/vurt.action";
+//import * as ActDsk from "../../act/disk.action";
 
 var bit, val, idx, dex, lst, dat;
 
@@ -30,22 +30,22 @@ export const updateTitle = (cpy: TitleModel, bal: TitleBit, ste: State) => {
  }
 
  process.chdir("../999.vurt");
- bit = await ste.bus(ActVrt.BUNDLE_VURT, { src: "000.title" });
- process.chdir("../000.title");
+ //bit = await ste.bus(ActVrt.BUNDLE_VURT, { src: "000.title" });
+ //process.chdir("../000.title");
 
- bit = await ste.bus(ActDsk.READ_DISK, { src: './work/000.title.js' })
- var title = bit.dskBit.dat;
+ //bit = await ste.bus(ActDsk.READ_DISK, { src: './work/000.title.js' })
+ //var title = bit.dskBit.dat;
 
- bit = await ste.bus(ActDsk.WRITE_DISK, { src: '../gillisse/public/jsx/000.title.js', dat: title })
+ //bit = await ste.bus(ActDsk.WRITE_DISK, { src: '../gillisse/public/jsx/000.title.js', dat: title })
 
- bit = await ste.bus(ActDsk.READ_DISK, { src: './index.html' })
- var html = bit.dskBit.dat;
+ //bit = await ste.bus(ActDsk.READ_DISK, { src: './index.html' })
+ //var html = bit.dskBit.dat;
 
- bit = await ste.bus(ActDsk.READ_DISK, { src: './index.js' })
- var index = bit.dskBit.dat;
+ //bit = await ste.bus(ActDsk.READ_DISK, { src: './index.js' })
+ //var index = bit.dskBit.dat;
 
- bit = await ste.bus(ActDsk.WRITE_DISK, { src: '../gillisse/public/jsx/index.js', dat: index })
- bit = await ste.bus(ActDsk.WRITE_DISK, { src: '../gillisse/index.html', dat: html })
+ //bit = await ste.bus(ActDsk.WRITE_DISK, { src: '../gillisse/public/jsx/index.js', dat: index })
+ //bit = await ste.bus(ActDsk.WRITE_DISK, { src: '../gillisse/index.html', dat: html })
 
  setTimeout(() => {
  if (bal.slv != null) bal.slv({ ttlBit: { idx: "update-title" } });
@@ -59,7 +59,7 @@ export const updateTitle = (cpy: TitleModel, bal: TitleBit, ste: State) => {
 
 export const openTitle = async (cpy: TitleModel, bal: TitleBit, ste: State) => {
 
- bit = await ste.bus(ActDsk.COPY_DISK, { src: './vue', idx: '../gillisse/src' })
+ //bit = await ste.bus(ActDsk.COPY_DISK, { src: './vue', idx: '../gillisse/src' })
 
  bit = await ste.hunt(ActTtl.RUN_TITLE, {})
 

@@ -22,8 +22,11 @@ case Act.RUN_TERMINAL:
 case Act.EDIT_TERMINAL:
  return Buzz.editTerminal(clone(model), act.bale, state);
  
-case Act.PATCH_TERMINAL:
- return Buzz.patchTerminal(clone(model), act.bale, state);
+case Act.PRINT_TERMINAL:
+ return Buzz.printTerminal(clone(model), act.bale, state);
+ 
+case Act.CLOSE_TERMINAL:
+ return Buzz.closeTerminal(clone(model), act.bale, state);
  
  default:
  return model;

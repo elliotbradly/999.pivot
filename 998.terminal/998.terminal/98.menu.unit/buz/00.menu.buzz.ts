@@ -18,10 +18,9 @@ export const initMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
 
 export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
 
- //bit = await ste.bus(ActTrm.WRITE_TERMINAL, { src: "-----------", bit: 'local' })
-
- //bit = await ste.bus(ActTrm.WRITE_TERMINAL, { src: "TERMINAL PIVOT V0", bit: 'local' })
- //bit = await ste.bus(ActTrm.WRITE_TERMINAL, { src: "-----------", bit: "local" })
+ bit = await ste.hunt(ActTrm.PRINT_TERMINAL, { src: "-----------", bit: 'local' })
+ bit = await ste.hunt(ActTrm.PRINT_TERMINAL, { src: "TERMINAL PIVOT V0", bit: 'local' })
+ bit = await ste.hunt(ActTrm.PRINT_TERMINAL, { src: "-----------", bit: "local" })
 
  var lst = [ ActTrm.UPDATE_TERMINAL, ActTrm.OPEN_TERMINAL, ActTrm.EDIT_TERMINAL ]
 
@@ -49,11 +48,11 @@ export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
 // bit = await ste.bus(ActTrm.WRITE_TERMINAL, { src: "PATCHING...", bit: 'local' })
 // bit = await ste.bus(ActTrm.WRITE_TERMINAL, { src: "-----------", bit: "local" })
 
- lst = [ActTrm.PATCH_TERMINAL]
+ //lst = [ActTrm.PATCH_TERMINAL]
 
- bit = await ste.bus(ActTrm.UPDATE_TERMINAL, { lst })
+ //bit = await ste.bus(ActTrm.UPDATE_TERMINAL, { lst })
 
- bit = await ste.hunt( ActTrm.PATCH_TERMINAL, {})
+ //bit = await ste.hunt( ActTrm.PATCH_TERMINAL, {})
 
  break;
 

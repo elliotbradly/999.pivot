@@ -32,9 +32,16 @@ export const EDIT_TERMINAL = "[Edit action] Edit Terminal";
  constructor(public bale: TerminalBit) {}
  }
  
-export const PATCH_TERMINAL = "[Patch action] Patch Terminal";
- export class PatchTerminal implements Action {
- readonly type = PATCH_TERMINAL;
+ 
+export const PRINT_TERMINAL = "[Print action] Print Terminal";
+ export class PrintTerminal implements Action {
+ readonly type = PRINT_TERMINAL;
+ constructor(public bale: TerminalBit) {}
+ }
+ 
+export const CLOSE_TERMINAL = "[Close action] Close Terminal";
+ export class CloseTerminal implements Action {
+ readonly type = CLOSE_TERMINAL;
  constructor(public bale: TerminalBit) {}
  }
  
@@ -42,5 +49,5 @@ export type Actions = | InitTerminal | UpdateTerminal
 | OpenTerminal
 | RunTerminal
 | EditTerminal
-| PatchTerminal
-
+| PrintTerminal
+| CloseTerminal
