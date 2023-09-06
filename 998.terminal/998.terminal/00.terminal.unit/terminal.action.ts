@@ -13,12 +13,6 @@ export class UpdateTerminal implements Action {
  readonly type = UPDATE_TERMINAL;
  constructor(public bale: TerminalBit) {}
 }
-
-export const OPEN_TERMINAL = "[Open action] Open Terminal";
- export class OpenTerminal implements Action {
- readonly type = OPEN_TERMINAL;
- constructor(public bale: TerminalBit) {}
- }
  
 export const RUN_TERMINAL = "[Run action] Run Terminal";
  export class RunTerminal implements Action {
@@ -45,9 +39,15 @@ export const CLOSE_TERMINAL = "[Close action] Close Terminal";
  constructor(public bale: TerminalBit) {}
  }
  
+export const OPTION_TERMINAL = "[Option action] Option Terminal";
+ export class OptionTerminal implements Action {
+ readonly type = OPTION_TERMINAL;
+ constructor(public bale: TerminalBit) {}
+ }
+ 
 export type Actions = | InitTerminal | UpdateTerminal 
-| OpenTerminal
 | RunTerminal
 | EditTerminal
 | PrintTerminal
 | CloseTerminal
+| OptionTerminal

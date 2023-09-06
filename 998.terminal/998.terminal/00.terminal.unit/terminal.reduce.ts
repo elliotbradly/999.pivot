@@ -12,9 +12,6 @@ export function reducer(model: TerminalModel = new TerminalModel(), act: Act.Act
 
  case Act.INIT_TERMINAL:
  return Buzz.initTerminal(clone(model), act.bale, state);
-
-case Act.OPEN_TERMINAL:
- return Buzz.openTerminal(clone(model), act.bale, state);
  
 case Act.RUN_TERMINAL:
  return Buzz.runTerminal(clone(model), act.bale, state);
@@ -27,6 +24,9 @@ case Act.PRINT_TERMINAL:
  
 case Act.CLOSE_TERMINAL:
  return Buzz.closeTerminal(clone(model), act.bale, state);
+ 
+case Act.OPTION_TERMINAL:
+ return Buzz.optionTerminal(clone(model), act.bale, state);
  
  default:
  return model;

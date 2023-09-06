@@ -106,6 +106,52 @@ export const closeTerminal = (cpy: TerminalModel, bal:TerminalBit, ste: State) =
 
 
  
+export const optionTerminal = (cpy: TerminalModel, bal:TerminalBit, ste: State) => {
+ 
+  if (bal == null) bal = { idx:''};
+  if (bal.lst == null) bal.lst = ["000", "001"];
+  if (bal.val == null) bal.val = 0;
+  if (cpy.rootIDX != null) bal.lst.push(cpy.rootIDX);
+
+  bal.lst.push(ActTrm.CLOSE_TERMINAL);
+
+  var list = [];
+  var options = {};
+
+  bal.lst.forEach((a) => {
+    if (a != "---") {
+      if (options[a] != null) return;
+    }
+
+    options[a] = 1;
+    list.push(a);
+  });
+
+  //here we have something special
+
+  cpy.term.singleColumnMenu(list, { selectedIndex: bal.val }, (err, rsp) => {
+    if (cpy.rootDAT != null) {
+      if (rsp.selectedIndex == bal.lst.length - 2) {
+        cpy.rootDAT();
+        return;
+      }
+    }
+
+    if (rsp.selectedIndex == bal.lst.length - 1) {
+      closeTerminal(cpy, bal, ste);
+      return;
+    }
+
+    if (bal.slv != null) bal.slv({ trmBit: { idx: "update-terminal", lst: list, val: rsp.selectedIndex } });
+  });
+
+
+
+ return cpy;
+ };
+
+
+
 import { TerminalModel } from "../terminal.model";
 import TerminalBit from "../fce/terminal.bit";
 import State from "../../99.core/state";
