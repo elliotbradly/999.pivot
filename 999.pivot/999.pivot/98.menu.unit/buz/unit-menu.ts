@@ -31,7 +31,7 @@ export const unitMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
 
     case ActUnt.CODE_UNIT:
 
-      bit = await ste.hunt( ActPvt.LIST_PIVOT );
+      bit = await ste.hunt(ActPvt.LIST_PIVOT);
       list = bit.pvtBit.lst
       bit = await ste.hunt(ActTrm.UPDATE_TERMINAL, { lst: list });
       var val = bit.trmBit.val
@@ -56,15 +56,15 @@ export const unitMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
 
     case ActUnt.UPDATE_UNIT:
 
-      bit = await ste.hunt(  ActPvt.LIST_PIVOT, {} );
+      bit = await ste.hunt(ActPvt.LIST_PIVOT, {});
       list = bit.pvtBit.lst
       bit = await ste.hunt(ActTrm.UPDATE_TERMINAL, { lst: list });
       var val = bit.trmBit.val
       var src = list[val];
 
-      bit = await ste.hunt( ActUnt.LIST_UNIT, { src });
+      bit = await ste.hunt(ActUnt.LIST_UNIT, { src });
 
-      
+
       list = bit.untBit.lst
       bit = await ste.hunt(ActTrm.UPDATE_TERMINAL, { lst: list });
 

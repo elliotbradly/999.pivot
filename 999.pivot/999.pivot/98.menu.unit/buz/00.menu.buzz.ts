@@ -4,7 +4,7 @@ import * as ActTrm from "../../01.terminal.unit/terminal.action";
 
 import * as ActVrt from "../../act/vurt.action"
 
-var bit, lst, dex
+var bit, lst, dex, src
 
 export const initMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
 
@@ -24,7 +24,7 @@ export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
     bit = await ste.hunt(ActTrm.WRITE_TERMINAL, { src: "PIVOT PIVOT V0", bit: 'local' })
     bit = await ste.hunt(ActTrm.WRITE_TERMINAL, { src: "-----------", bit: "local" })
 
-    var lst = [ ActMnu.UNIT_MENU, ActPvt.COUNT_PIVOT ]
+    var lst = [ActMnu.UNIT_MENU, ActPvt.COUNT_PIVOT, ActPvt.CREATE_PIVOT]
 
     bit = await ste.hunt(ActTrm.UPDATE_TERMINAL, { lst })
 
@@ -53,6 +53,23 @@ export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
 
         case ActMnu.UNIT_MENU:
             bit = await ste.hunt(ActMnu.UNIT_MENU, {})
+            break;
+
+        case ActPvt.CREATE_PIVOT:
+
+
+            bit = await ste.hunt(ActTrm.INPUT_TERMINAL, { lst: ["", "", "Nom Pivot..."] });
+            idx = bit.trmBit.src;
+
+            bit = await ste.hunt(ActTrm.INPUT_TERMINAL, { lst: ["", "", "Name Pivot..."] });
+            src = bit.trmBit.src;
+
+            bit = await ste.hunt(ActTrm.INPUT_TERMINAL, { lst: ["", "", "Dex Pivot..."] });
+            dex = bit.trmBit.src;
+
+            bit = await ste.hunt(ActPvt.CREATE_PIVOT, { idx, src, dex })
+            updateMenu(cpy, bal, ste);
+
             break;
 
 

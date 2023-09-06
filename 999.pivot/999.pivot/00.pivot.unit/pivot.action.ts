@@ -50,6 +50,13 @@ export const PATCH_PIVOT = "[Patch action] Patch Pivot";
  readonly type = LIST_PIVOT;
  constructor(public bale: PivotBit) {}
  }
+
+
+ export const CREATE_PIVOT = "[Patch action] Create Pivot";
+ export class CreatePivot implements Action {
+ readonly type = CREATE_PIVOT;
+ constructor(public bale: PivotBit) {}
+ }
  
 export type Actions = | InitPivot | UpdatePivot 
 | OpenPivot
@@ -58,4 +65,5 @@ export type Actions = | InitPivot | UpdatePivot
 | PatchPivot
 | CountPivot
 | ListPivot
+| CreatePivot
 
