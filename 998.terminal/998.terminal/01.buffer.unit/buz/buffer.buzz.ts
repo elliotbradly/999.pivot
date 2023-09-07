@@ -1,10 +1,12 @@
 
 import * as ActCol from "../../97.collect.unit/collect.action";
-
 import * as ActBuf from "../../01.buffer.unit/buffer.action";
+
+import * as ActDsk from "../../act/disk.action"
 
 var termkit = require('terminal-kit');
 var ScreenBuffer = termkit.ScreenBuffer;
+var ScreenBufferHD = termkit.ScreenBufferHD;
 
 var bit;
 
@@ -13,12 +15,7 @@ export const initBuffer = (cpy: BufferModel, bal: BufferBit, ste: State) => {
     var trmMod: TerminalModel = ste.value.terminal
     var term = trmMod.term
 
-    cpy.view = new ScreenBuffer({
-        dst: term,
-        width: Math.min(term.width),
-        height: Math.min(term.height - 1),
-        y: 2
-    });
+
 
 
     if (bal.slv != null) bal.slv({ idxBit: { idx: "init-buffer" } });
@@ -114,9 +111,45 @@ export const listBuffer = async (cpy: BufferModel, bal: BufferBit, ste: State) =
 };
 
 
+export const testBuffer = async (cpy: BufferModel, bal: BufferBit, ste: State) => {
+
+    let term = ste.value.terminal.term;
+
+    let height = 440;
+
+    cpy.view = new ScreenBuffer({
+        dst: term,
+        width: Math.min(term.width),
+        height: height,
+        y: 2
+    });
+
+    let background = new ScreenBuffer({
+        width: cpy.view.width * 4,
+        height: cpy.view.height,
+        noFill: true
+    });
+
+    let ship = FS.readFileSync('./data/buffer/spaceship.txt')
+
+    let spaceship = ScreenBuffer.createFromChars({ attr: { color: 'cyan', bold: true }, transparencyChar: '#', transparencyType: ScreenBuffer.TRANSPARENCY }, ship);
+
+    background.fill({ attr: { color: 'white', bgColor: 'black' } });
+
+    background.draw( { dst: cpy.view , tile: true } ) ;
+    spaceship.draw( { dst: cpy.view , blending: true , wrap: 'both' } ) ;
+    cpy.view.draw( { delta: true } ) ;
+
+
+    if (bal.slv != null) bal.slv({ bufBit: { idx: "test-buffer" } });
+    return cpy;
+};
+
+
+
 import { BufferModel } from "../buffer.model";
 import BufferBit from "../fce/buffer.bit";
 import State from "../../99.core/state";
 import { TerminalModel } from "998.terminal/00.terminal.unit/terminal.model";
 import BufBit from "../fce/bufBit";
-
+import * as FS from 'fs-extra'

@@ -63,6 +63,12 @@ export const LIST_BUFFER = "[List action] List Buffer";
  constructor(public bale: BufferBit) {}
  }
  
+export const TEST_BUFFER = "[Test action] Test Buffer";
+ export class TestBuffer implements Action {
+ readonly type = TEST_BUFFER;
+ constructor(public bale: BufferBit) {}
+ }
+ 
 export type Actions = | InitBuffer | UpdateBuffer 
 | DrawBuffer
 | BackgroundBuffer
@@ -72,3 +78,4 @@ export type Actions = | InitBuffer | UpdateBuffer
 | DeleteBuffer
 | RemoveBuffer
 | ListBuffer
+| TestBuffer

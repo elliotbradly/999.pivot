@@ -8,3 +8,4 @@ export { createBuffer  } from "./buz/buffer.buzz";
 export { deleteBuffer  } from "./buz/buffer.buzz";
 export { removeBuffer  } from "./buz/buffer.buzz";
 export { listBuffer  } from "./buz/buffer.buzz";
+export { testBuffer  } from "./buz/buffer.buzz";

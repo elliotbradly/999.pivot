@@ -37,6 +37,9 @@ case Act.REMOVE_BUFFER:
 case Act.LIST_BUFFER:
  return Buzz.listBuffer(clone(model), act.bale, state);
  
+case Act.TEST_BUFFER:
+ return Buzz.testBuffer(clone(model), act.bale, state);
+ 
  default:
  return model;
  }
