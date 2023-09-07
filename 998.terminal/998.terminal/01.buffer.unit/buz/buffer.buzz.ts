@@ -71,7 +71,7 @@ export const readBuffer = async (cpy: BufferModel, bal: BufferBit, ste: State) =
 export const writeBuffer = async (cpy: BufferModel, bal: BufferBit, ste: State) => {
 
     bit = await ste.hunt(ActCol.WRITE_COLLECT, { idx: bal.idx, src: bal.src, dat: bal.dat, bit: ActBuf.CREATE_BUFFER })
-    
+
     if (bal.slv != null) bal.slv({ canBit: { idx: "write-container", dat: bit.clcBit.dat } });
 
     return cpy;
@@ -86,9 +86,9 @@ export const createBuffer = async (cpy: BufferModel, bal: BufferBit, ste: State)
     }
 
     try {
-       // dat.bit = new PIXI.Container();
+        // dat.bit = new PIXI.Container();
     } catch (e) {
-       // dat.dat = {};
+        // dat.dat = {};
     }
 
     if (bal.slv != null) return bal.slv({ bufBit: { idx: "create-buffer", dat } });

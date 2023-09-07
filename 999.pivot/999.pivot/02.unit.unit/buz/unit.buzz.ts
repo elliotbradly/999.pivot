@@ -283,24 +283,26 @@ export const listUnit = (cpy: UnitModel, bal: UnitBit, ste: State) => {
 
 export const replaceUnit = async (cpy: UnitModel, bal: UnitBit, ste: State) => {
 
+  debugger
+
   var bit;
 
   bit = await ste.hunt(ActPvt.LIST_PIVOT)
-  var list = bit.vrtBit.lst;
+  var list = bit.pvtBit.lst;
 
   let filter = list.filter((e) => { return e != cpy.idx });
 
   var fin = ''
 
-  if (bal.idx == 'vurt') {
+  if (bal.idx == 'pivot') {
 
-    bit = await ste.bus(ActDsk.READ_DISK, { src: './work/999.vurt.js' })
+    bit = await ste.bus(ActDsk.READ_DISK, { src: './work/999.pivot.js' })
     var vurt = bit.dskBit.dat;
 
-    bit = await ste.bus(ActDsk.WRITE_DISK, { src: '../998.work/work/999.vurt.js', dat: vurt })
+    bit = await ste.bus(ActDsk.WRITE_DISK, { src: '../998.work/work/999.pivot.js', dat: vurt })
 
     setTimeout(() => {
-      if (bal.slv != null) bal.slv({ vrtBit: { idx: "replace-vurt" } });
+      if (bal.slv != null) bal.slv({ untBit: { idx: "replace-unit" } });
     }, 3333)
 
     return
@@ -308,14 +310,21 @@ export const replaceUnit = async (cpy: UnitModel, bal: UnitBit, ste: State) => {
 
   if (bal.idx == 'collect') {
 
+    debugger
+
     bit = await ste.hunt(ActPvt.CONTAINS_PIVOT, { lst: filter, src: 'collect' })
-    let filterB = bit.vrtBit.lst.filter((e) => { return e[0] != '999.vurt' })
+    let filterB = bit.pvtBit.lst.filter((e) => { return e[0] != '999.pivot' })
+
+    debugger
 
     filterB.forEach(async (a) => {
 
-      var sigh = '999.vurt'
+      var sigh = '999.pivot'
       var remove = '../' + a[0] + '/' + a[0] + '/' + a[1]
       var copy = '../' + sigh + '/' + sigh + '/' + a[1]
+
+      debugger
+
       bit = await FS.ensureDir(remove)
 
       console.log("ensuring..." + remove)
@@ -325,8 +334,8 @@ export const replaceUnit = async (cpy: UnitModel, bal: UnitBit, ste: State) => {
     })
 
     setTimeout(() => {
-      if (bal.slv != null) bal.slv({ vrtBit: { idx: "replace-vurt", lst: filterB } });
-    }, 5333)
+      if (bal.slv != null) bal.slv({ untBit: { idx: "replace-unit", lst: filterB } });
+    }, 1333)
     return
   }
 

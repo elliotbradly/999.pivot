@@ -69,7 +69,7 @@ export const writeCollect = async (cpy: CollectModel, bal: CollectBit, ste: Stat
             var objDat = bit[Object.keys(bit)[0]];
             dat = objDat.dat
 
-            if ( dat == null ) dat = {}
+            if (dat == null) dat = {}
 
             dat.dex = cabBit.bitList.length;
             cabBit.bitList.push(dat)
@@ -191,6 +191,23 @@ export const emptyCollect = (cpy: CollectModel, bal: CollectBit, ste: State) => 
       return cpy;
 };
 
+export const dotCollect = (cpy: CollectModel, bal: CollectBit, ste: State) => {
+      
+      var gel = bal.dat;
+      var out = [];
+    
+      bal.src.split("\n").forEach((a, b) => {
+        if (a.includes('//') == true) return
+        var doTCompiled = doT.template(a);
+        var outLine = doTCompiled(gel);
+        out.push(outLine);
+      });
+    
+      if (bal.slv != null) bal.slv({ colBit: { idx: "dot-vurt", lst: out, src: out.join('\n') } });
+
+      return cpy;
+};
+
 
 export const formatCollect = (cpy: CollectModel, bal: CollectBit, ste: State) => {
 
@@ -221,3 +238,4 @@ import State from "../../99.core/state";
 import CaboodleBit from "../fce/caboodle.bit";
 import * as S from 'string'
 
+import * as doT from "dot";

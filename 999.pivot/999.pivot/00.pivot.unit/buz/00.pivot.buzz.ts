@@ -153,15 +153,20 @@ export const containsPivot = (cpy: PivotModel, bal: PivotBit, ste: State) => {
     var out = [];
     var check = bal.src;
 
+    debugger
+
     bal.lst.forEach((a) => {
         var dir = '../' + a + '/' + a
         var lst = FS.readdirSync(dir)
+        
+        debugger
+        
         lst.forEach((b) => {
             if (b.includes(check)) out.push([a, b])
         })
     })
 
-    if (bal.slv != null) bal.slv({ vrtBit: { idx: "contains-vurt", lst: out } });
+    if (bal.slv != null) bal.slv({ pvtBit: { idx: "contains-pivot", lst: out } });
 
     return cpy;
 };

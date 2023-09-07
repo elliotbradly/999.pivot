@@ -11,3 +11,4 @@ export { modelCollect  } from "./buz/collect.buzz";
 export { putCollect  } from "./buz/collect.buzz";
 export { getCollect  } from "./buz/collect.buzz";
 export { formatCollect  } from "./buz/collect.buzz";
+export { dotCollect  } from "./buz/collect.buzz";
