@@ -33,5 +33,12 @@ export const CODE_UNIT = "[Code action] Code Unit";
  constructor(public bale: UnitBit) {}
  }
  
+export const REPLACE_UNIT = "[Replace action] Replace Unit";
+ export class ReplaceUnit implements Action {
+ readonly type = REPLACE_UNIT;
+ constructor(public bale: UnitBit) {}
+ }
+ 
 export type Actions = | InitUnit | UpdateUnit | CreateUnit 
 | CodeUnit | ListUnit
+| ReplaceUnit

@@ -148,17 +148,35 @@ export const listPivot = async (cpy: PivotModel, bal: PivotBit, ste: State) => {
     return cpy;
 };
 
+export const containsPivot = (cpy: PivotModel, bal: PivotBit, ste: State) => {
 
-var patch = (ste, type, bale) => ste.dispatch({ type, bale });
+    var out = [];
+    var check = bal.src;
+
+    bal.lst.forEach((a) => {
+        var dir = '../' + a + '/' + a
+        var lst = FS.readdirSync(dir)
+        lst.forEach((b) => {
+            if (b.includes(check)) out.push([a, b])
+        })
+    })
+
+    if (bal.slv != null) bal.slv({ vrtBit: { idx: "contains-vurt", lst: out } });
+
+    return cpy;
+};
 
 export const patchPivot = (cpy: PivotModel, bal: PivotBit, ste: State) => {
     debugger
     return cpy;
 };
 
+
+var patch = (ste, type, bale) => ste.dispatch({ type, bale });
+
 import { PivotModel } from "../pivot.model";
 import PivotBit from "../fce/pivot.bit";
 import State from "../../99.core/state";
 import * as FS from 'fs-extra'
-import * as S from 'string' 
+import * as S from 'string'
 

@@ -2,7 +2,7 @@ import Unit from "./fce/unit.interface";
 import UnitBit from "./fce/unit.interface";
 
 export class UnitModel implements Unit {
-  //idx:string;
+  idx:string = '02.unit';
   //unitBitList: UnitBit[] = [];
   //unitBits: any = {};
 

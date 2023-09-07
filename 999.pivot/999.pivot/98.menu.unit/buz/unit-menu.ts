@@ -20,7 +20,7 @@ export const unitMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
   bit = await ste.hunt(ActTrm.WRITE_TERMINAL, { val: 4, src: "UNIT MENU" })
   bit = await ste.hunt(ActTrm.WRITE_TERMINAL, { val: 1, src: "-----------" })
 
-  var list = [ActUnt.UPDATE_UNIT, ActUnt.CREATE_UNIT, ActUnt.CODE_UNIT]
+  var list = [ActUnt.UPDATE_UNIT, ActUnt.CREATE_UNIT, ActUnt.CODE_UNIT, ActUnt.REPLACE_UNIT]
 
   bit = await ste.hunt(ActTrm.UPDATE_TERMINAL, { lst: list });
   bit = bit.trmBit;
@@ -49,6 +49,29 @@ export const unitMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
       bal.src = bit.trmBit.src;
 
       bit = await ste.hunt(ActUnt.CREATE_UNIT, bal);
+
+      unitMenu(cpy, bal, ste);
+
+      break
+
+
+      
+    case ActUnt.REPLACE_UNIT:
+
+      var list = ['core', 'bus', 'hunt', 'collect', 'vurt']
+      bit = await ste.hunt(ActTrm.UPDATE_TERMINAL, { lst: list });
+      bit = bit.trmBit;
+      var idx = list[bit.val];
+
+      if (idx == null) {
+
+        bit = await ste.hunt(ActMnu.CLOSE_MENU, {});
+
+        return
+      }
+
+
+      bit = await ste.hunt(ActUnt.REPLACE_UNIT, { idx })
 
       unitMenu(cpy, bal, ste);
 

@@ -5,5 +5,6 @@ export default interface ControlBit {
  val?:number;
  dex?:number;
  dat?:any;
+ lst?:any[];
  slv?:Function;
 }

@@ -1,3 +1,6 @@
+import * as ActPvt from "../../00.pivot.unit/pivot.action";
+import * as ActDsk from "../../96.disk.unit/disk.action";
+
 export const initUnit = (cpy: UnitModel, bal: UnitBit, ste: State) => {
   debugger
   return cpy;
@@ -276,6 +279,106 @@ export const listUnit = (cpy: UnitModel, bal: UnitBit, ste: State) => {
 
   return cpy;
 };
+
+
+export const replaceUnit = async (cpy: UnitModel, bal: UnitBit, ste: State) => {
+
+  var bit;
+
+  bit = await ste.hunt(ActPvt.LIST_PIVOT)
+  var list = bit.vrtBit.lst;
+
+  let filter = list.filter((e) => { return e != cpy.idx });
+
+  var fin = ''
+
+  if (bal.idx == 'vurt') {
+
+    bit = await ste.bus(ActDsk.READ_DISK, { src: './work/999.vurt.js' })
+    var vurt = bit.dskBit.dat;
+
+    bit = await ste.bus(ActDsk.WRITE_DISK, { src: '../998.work/work/999.vurt.js', dat: vurt })
+
+    setTimeout(() => {
+      if (bal.slv != null) bal.slv({ vrtBit: { idx: "replace-vurt" } });
+    }, 3333)
+
+    return
+  }
+
+  if (bal.idx == 'collect') {
+
+    bit = await ste.hunt(ActPvt.CONTAINS_PIVOT, { lst: filter, src: 'collect' })
+    let filterB = bit.vrtBit.lst.filter((e) => { return e[0] != '999.vurt' })
+
+    filterB.forEach(async (a) => {
+
+      var sigh = '999.vurt'
+      var remove = '../' + a[0] + '/' + a[0] + '/' + a[1]
+      var copy = '../' + sigh + '/' + sigh + '/' + a[1]
+      bit = await FS.ensureDir(remove)
+
+      console.log("ensuring..." + remove)
+      bit = await FS.remove(remove)
+      bit = await FS.copy(copy, remove)
+      console.log("copying..." + copy)
+    })
+
+    setTimeout(() => {
+      if (bal.slv != null) bal.slv({ vrtBit: { idx: "replace-vurt", lst: filterB } });
+    }, 5333)
+    return
+  }
+
+  switch (bal.idx) {
+
+    case "bus":
+
+      fin = '99.bus.unit'
+      break
+
+    case "core":
+      fin = '99.core'
+      break
+
+    case "hunt":
+      fin = 'hunt.ts'
+      break
+
+  }
+
+  filter.forEach((a) => {
+
+    var src, out;
+
+    if (fin.includes('.') == true) {
+
+      src = '../' + a + '/' + a + '/' + fin;
+      out = './' + cpy.idx + '/' + fin;
+
+    } else {
+
+      src = '../' + a + '/' + a + '/' + fin;
+      out = './' + cpy.idx + '/' + fin;
+
+    }
+
+    FS.ensureDirSync(src)
+
+    FS.removeSync(src)
+
+    FS.copySync(out, src)
+    console.log('copying ' + out + ' -> ' + src)
+
+  })
+
+  if (bal.slv != null) bal.slv({ untBit: { idx: "replace-unit", lst: filter } });
+
+
+  return cpy;
+};
+
+
 
 
 import { UnitModel } from "../unit.model";

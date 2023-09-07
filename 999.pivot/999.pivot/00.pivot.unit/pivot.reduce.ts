@@ -33,6 +33,9 @@ case Act.PATCH_PIVOT:
 
  case Act.CREATE_PIVOT:
  return Buzz.createPivot(clone(model), act.bale, state);
+
+ case Act.CONTAINS_PIVOT:
+ return Buzz.containsPivot(clone(model), act.bale, state);
  
  default:
  return model;
